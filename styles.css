@@ -1,0 +1,49 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page_container__aoG4z {
+    width: 80%;
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+.page_header__kVzhN {
+    font-size: 24px;
+}
+
+.TrackSelector_container__pm_iE {
+    display: flex;
+    margin-top: 10px;
+}
+
+.TrackSelector_trackButton__arDBC {
+    background-color: #6C7D47;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.TimelineControls_container__dIU_K {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.TimelineControls_container__dIU_K p {
+    margin-right: 20px;
+}
+
+.Timeline_timelineContainer__IvRqC {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+/* Add more styles as needed */
