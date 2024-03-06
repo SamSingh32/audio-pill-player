@@ -1,37 +1,57 @@
 import React, { useState } from 'react';
-import AudioTrack from './AudioTrack';
+import TrackSelector from './components/TrackSelector';
+import Timeline from './components/Timeline';
 
-const App = () => {
-  const [audioFiles, setAudioFiles] = useState([
-    { id: 1, src: 'audio1.mp3', start: 0, end: 10 },
-    { id: 2, src: 'audio2.mp3', start: 10, end: 20 },
-    { id: 3, src: 'audio3.mp3', start: 20, end: 30 },
-  ]);
+function App() {
+  const [audioTracks, setAudioTracks] = useState([]);
+  const [currentTrackId, setCurrentTrackId] = useState(null);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [playbackRate, setPlaybackRate] = useState(1);
 
-  const handleMove = (id, start, end) => {
-    setAudioFiles(
-      audioFiles.map((audio) => {
-        if (audio.id === id) {
-          return { ...audio, start, end };
-        }
-        if (audio.start >= end) {
-          return { ...audio, start: audio.start + 1 };
-        }
-        if (audio.end > start) {
-          return { ...audio, end: audio.end + 1 };
-        }
-        return audio;
-      })
+  const addAudioTrack = (audioTrack) => {
+    setAudioTracks([...audioTracks, audioTrack]);
+  };
+
+  const deleteAudioTrack = (id) => {
+    setAudioTracks(audioTracks.filter((track) => track.id !== id));
+  };
+
+  const shiftAudioTrack = (id, newPosition) => {
+    setAudioTracks(
+      audioTracks.map((track) =>
+        track.id === id ? { ...track, position: newPosition } : track
+      )
     );
   };
 
+  const setPlayback = (newRate) => {
+    setPlaybackRate(newRate);
+  };
+
+  const setCurrent = (id) => {
+    setCurrentTrackId(id);
+  };
+
+  const setTime = (time) => {
+    setCurrentTime(time);
+  };
+
   return (
-    <div>
-      {audioFiles.map((audio) => (
-        <AudioTrack key={audio.id} audio={audio} onMove={handleMove} />
-      ))}
+    <div className="App">
+      <TrackSelector addAudioTrack={addAudioTrack} />
+      <Timeline
+        audioTracks={audioTracks}
+        currentTrackId={currentTrackId}
+        currentTime={currentTime}
+        playbackRate={playbackRate}
+        deleteAudioTrack={deleteAudioTrack}
+        shiftAudioTrack={shiftAudioTrack}
+        setPlayback={setPlayback}
+        setCurrent={setCurrent}
+        setTime={setTime}
+      />
     </div>
   );
-};
+}
 
 export default App;
